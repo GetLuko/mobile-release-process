@@ -3,19 +3,20 @@ import util from "util";
 
 const exec = util.promisify(require("child_process").exec);
 
+const genericCommandError = (command: string) => `command "${command}" failed`;
+
 export const asyncExec = async (command: string) => {
   try {
     await exec(command);
-  } catch (error) {
+  } catch (error: any) {
     print({
-      message: `❌ ${error?.message ?? `command "${command}" failed`}`,
+      message: `❌ ${error?.message ?? genericCommandError(command)}`,
       type: "error",
     });
     process.exit(1);
   }
 };
 
-// eslint-disable-next-line no-console
 export const log = console.log;
 
 type Print = {

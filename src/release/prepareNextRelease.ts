@@ -1,28 +1,23 @@
-import Listr from 'listr';
-import { pipe } from 'lodash/fp';
+import Listr from "listr";
+import { pipe } from "lodash/fp";
 
-import { alpha, dev } from '../git/git.config';
-import { checkout, commit, merge, pull, push } from '../git/git.utils';
-import { print } from '../script.utils';
-import { bumpBuildNumber } from './bumpBuildNumber';
-import { bumpVersionNumber } from './bumpVersionNumber';
-import {
-  getCurrentAppVersion,
-  getCurrentBuildNumber,
-  incrementAppVersion,
-  incrementBuildNumber,
-} from './release.utils';
+import { alpha, dev } from "../git/git.config";
+import { checkout, commit, merge, pull, push } from "../git/git.utils";
+import { print } from "../script.utils";
+import { bumpBuildNumber } from "./bumpBuildNumber";
+import { bumpVersionNumber } from "./bumpVersionNumber";
+import { getCurrentAppVersion, getCurrentBuildNumber, incrementAppVersion, incrementBuildNumber } from "./release.utils";
 
 async function prepareNextRelease(releaseNumber: string) {
-  print({ message: 'Prepare next release 🚀' });
+  print({ message: "Prepare next release 🚀" });
 
   const tasks = new Listr([
     {
-      title: 'Switch on alpha branch',
-      task: async () => await pipe(alpha, checkout)(releaseNumber),
+      title: "Switch on alpha branch",
+      task: async () => pipe(alpha, checkout)(releaseNumber),
     },
     {
-      title: 'Bump app version',
+      title: "Bump app version",
       task: async () => {
         const currentVersion = await getCurrentAppVersion();
         const nextVersion = incrementAppVersion({ version: currentVersion });
@@ -30,7 +25,7 @@ async function prepareNextRelease(releaseNumber: string) {
       },
     },
     {
-      title: 'Bump build number',
+      title: "Bump build number",
       task: async () => {
         const currentBuildNumber = await getCurrentBuildNumber();
         const nextBuildNumber = incrementBuildNumber({
@@ -40,28 +35,28 @@ async function prepareNextRelease(releaseNumber: string) {
       },
     },
     {
-      title: 'Commit build & app bump',
+      title: "Commit build & app bump",
       task: () =>
         commit({
-          message: 'Core - Release feat: bump version',
+          message: "Core - Release feat: bump version",
           noVerify: true,
         }),
     },
     {
-      title: 'Checkout on dev',
+      title: "Checkout on dev",
       task: () => checkout(dev),
     },
     {
-      title: 'Update dev branch',
+      title: "Update dev branch",
       task: () => pull(dev),
     },
     {
-      title: 'Merge local alpha branch on dev',
-      task: async () => await pipe(alpha, merge)(releaseNumber),
+      title: "Merge local alpha branch on dev",
+      task: async () => pipe(alpha, merge)(releaseNumber),
     },
     {
-      title: 'Update the remote branch dev',
-      task: async () => await push(dev),
+      title: "Update the remote branch dev",
+      task: async () => push(dev),
     },
   ]);
 

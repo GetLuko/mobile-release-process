@@ -14,7 +14,7 @@ export const isSemVer = overEvery<AnswerReleaseNumber["releaseNumber"]>([
 
 export const checkReleaseNumber = (answer: { releaseNumber?: string }): answer is AnswerReleaseNumber => {
   if (isNil(answer) || isNil(answer.releaseNumber)) {
-    return;
+    return false;
   }
 
   return isSemVer(answer.releaseNumber);
@@ -33,7 +33,7 @@ export const incrementAppVersion = ({ version, by = 10 }: { version: any; by?: n
   return `${major}.${minor}.${bumpedPatch}`;
 };
 
-export const incrementBuildNumber = ({ buildNumber, by = 10 }: { buildNumber: any; by?: number }): string => {
+export const incrementBuildNumber = ({ buildNumber, by = 10 }: { buildNumber: any; by?: number }) => {
   const number = Number(buildNumber);
 
   if (isNil(buildNumber) || isNaN(number)) {
@@ -45,8 +45,7 @@ export const incrementBuildNumber = ({ buildNumber, by = 10 }: { buildNumber: an
 
 export const getPackageJson = () => {
   const baseDir = path.join(__dirname, "../../");
-  const packageJson = fs.readFileSync(path.join(baseDir, files.packageJson), "utf8");
-  return packageJson;
+  return fs.readFileSync(path.join(baseDir, files.packageJson), "utf8");
 };
 
 export const getCurrentAppVersion = () => {
@@ -56,7 +55,6 @@ export const getCurrentAppVersion = () => {
   if (packageJsonVersionNumberSearchResult !== null) {
     return packageJsonVersionNumberSearchResult[0].match(/(\d|\.)+/)?.[0];
   }
-  return;
 };
 
 export const getCurrentBuildNumber = () => {
@@ -67,5 +65,4 @@ export const getCurrentBuildNumber = () => {
   if (packageJsonBuildNumberSearchResult !== null) {
     return packageJsonBuildNumberSearchResult[0].match(/(\d)+/)![0];
   }
-  return;
 };

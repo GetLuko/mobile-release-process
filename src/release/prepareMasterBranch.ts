@@ -1,24 +1,24 @@
-import Listr from 'listr';
-import { pipe } from 'lodash/fp';
+import Listr from "listr";
+import { pipe } from "lodash/fp";
 
-import { alpha, master } from '../git/git.config';
-import { checkout, pull, push, merge, tag } from '../git/git.utils';
-import { print } from '../script.utils';
+import { alpha, master } from "../git/git.config";
+import { checkout, pull, push, merge, tag } from "../git/git.utils";
+import { print } from "../script.utils";
 
-async function releaseMasterBranch(releaseNumber: string) {
-  print({ message: '\nRelease master branch 🚀' });
+async function prepareMasterBranch(releaseNumber: string) {
+  print({ message: "\nPrepare master branch 🚀" });
 
   const tasks = new Listr([
     {
-      title: 'Switch on master branch',
+      title: "Switch on master branch",
       task: () => checkout(master),
     },
     {
-      title: 'Pull changes from the master remote branch',
+      title: "Pull changes from the master remote branch",
       task: () => pull(master),
     },
     {
-      title: 'Merge master with the alpha branch changes',
+      title: "Merge master with the alpha branch changes",
       task: () => pipe(alpha, merge)(releaseNumber),
     },
     {
@@ -26,7 +26,7 @@ async function releaseMasterBranch(releaseNumber: string) {
       task: () => tag(releaseNumber),
     },
     {
-      title: 'Update remote master branch and trigger Bitrise pipeline',
+      title: "Update remote master branch and trigger Bitrise pipeline",
       task: async () => {
         await push(master);
         await push(`v${releaseNumber}`);
@@ -37,4 +37,4 @@ async function releaseMasterBranch(releaseNumber: string) {
   await tasks.run();
 }
 
-export default releaseMasterBranch;
+export default prepareMasterBranch;

@@ -17,7 +17,7 @@ export type CheckSubmitCommit = {
 
 const checkSubmitCommit = (answer: any): answer is CheckSubmitCommit => {
   if (isNil(answer) || isNil(answer?.submitCommit)) {
-    return;
+    return false;
   }
 
   return typeof answer?.submitCommit === "boolean";
@@ -46,7 +46,7 @@ const generateChangelog = async (releaseNumber: string) => {
     },
     {
       title: "Checkout on current alpha branch",
-      task: async () => await pipe(alpha, checkout)(releaseNumber),
+      task: async () => pipe(alpha, checkout)(releaseNumber),
     },
     {
       title: "Generate the changelog",
@@ -54,7 +54,7 @@ const generateChangelog = async (releaseNumber: string) => {
     },
     {
       title: "Save the changelog",
-      task: async () => await saveChangelog(releaseNumber),
+      task: async () => saveChangelog(releaseNumber),
     },
   ]);
 
