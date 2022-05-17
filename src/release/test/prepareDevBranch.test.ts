@@ -12,7 +12,10 @@ import {
 describe("release utility function", () => {
   const fakePackageJson = '{ "version": "0.3.800", "buildNumber": "900" }';
   beforeEach(() => {
-    jest.spyOn(fs, "readFileSync").mockReturnValueOnce(fakePackageJson).mockReturnValueOnce("{}");
+    jest
+      .spyOn(fs, "readFileSync")
+      .mockReturnValueOnce(fakePackageJson)
+      .mockReturnValueOnce("{}");
   });
 
   afterEach(() => {
@@ -26,10 +29,14 @@ describe("release utility function", () => {
 
   it("should return current app version", () => {
     expect(getCurrentAppVersion()).toBe("0.3.800");
-    expect(() => getCurrentAppVersion()).toThrow("Could not find 'version' in package.json");
+    expect(() => getCurrentAppVersion()).toThrow(
+      "Could not find 'version' in package.json"
+    );
   });
   it("should return package.json", () => {
-    expect(getPackageJson()).toStrictEqual('{ "version": "0.3.800", "buildNumber": "900" }');
+    expect(getPackageJson()).toStrictEqual(
+      '{ "version": "0.3.800", "buildNumber": "900" }'
+    );
     expect(getPackageJson()).toStrictEqual("{}");
   });
   it("should get current build number", () => {

@@ -1,4 +1,4 @@
-import { asyncExec } from '../script.utils';
+import { asyncExec } from "../script.utils";
 
 export const checkout = (branch: string) => asyncExec(`git checkout ${branch}`);
 
@@ -7,9 +7,9 @@ export const createBranch = (branch: string) =>
 
 export const pull = (branch: string) => asyncExec(`git pull origin ${branch}`);
 
-export const fetch = () => asyncExec('git fetch --tags -f');
+export const fetch = () => asyncExec("git fetch --tags -f");
 
-export const changelog = () => asyncExec('yarn changelog');
+export const changelog = () => asyncExec("yarn changelog");
 
 export const commit = ({
   message,
@@ -17,7 +17,7 @@ export const commit = ({
 }: {
   message: string;
   noVerify?: boolean;
-}) => asyncExec(`git commit -am "${message}" ${noVerify ? '--no-verify' : ''}`);
+}) => asyncExec(`git commit -am "${message}" ${noVerify ? "--no-verify" : ""}`);
 
 export const push = (branch: string) => asyncExec(`git push origin ${branch}`);
 

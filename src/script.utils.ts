@@ -52,7 +52,11 @@ export const throwError = (message: string) => {
 const isProduction: boolean = process.env.NODE_ENV === "production";
 const prefix = "[invariant]";
 
-export function invariant(condition: boolean, context: string, message: string): asserts condition {
+export function invariant(
+  condition: boolean,
+  context: string,
+  message: string
+): asserts condition {
   if (condition) {
     return;
   }
@@ -66,7 +70,13 @@ export function invariant(condition: boolean, context: string, message: string):
   throw new Error(value);
 }
 
-export const getErrorMessage = ({ error, fallbackMessage }: { error: unknown; fallbackMessage: string }) => {
+export const getErrorMessage = ({
+  error,
+  fallbackMessage,
+}: {
+  error: unknown;
+  fallbackMessage: string;
+}) => {
   if (error instanceof Error) {
     return error.message;
   } else {
