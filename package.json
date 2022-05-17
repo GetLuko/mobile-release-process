@@ -9,7 +9,7 @@
     "url": "https://github.com/GetLuko/mobile-release-process"
   },
   "bin": {
-    "project-name": "bin/cli"
+    "mobile-release-process": "bin/cli"
   },
   "scripts": {
     "test": "jest",
@@ -19,13 +19,18 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "esm": "^3.2.25"
+    "enquirer": "^2.3.6",
+    "esm": "^3.2.25",
+    "listr": "^0.14.3",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.1",
+    "@types/listr": "^0.14.4",
+    "@types/lodash": "^4.14.182",
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
