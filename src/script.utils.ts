@@ -65,3 +65,11 @@ export function invariant(condition: boolean, context: string, message: string):
 
   throw new Error(value);
 }
+
+export const getErrorMessage = ({ error, fallbackMessage }: { error: unknown; fallbackMessage: string }) => {
+  if (error instanceof Error) {
+    return error.message;
+  } else {
+    return fallbackMessage;
+  }
+};
