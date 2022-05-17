@@ -6,7 +6,12 @@ import { checkout, commit, merge, pull, push } from "../git/git.utils";
 import { print } from "../script.utils";
 import { bumpBuildNumber } from "./bumpBuildNumber";
 import { bumpVersionNumber } from "./bumpVersionNumber";
-import { getCurrentAppVersion, getCurrentBuildNumber, incrementAppVersion, incrementBuildNumber } from "./release.utils";
+import {
+  getCurrentAppVersion,
+  getCurrentBuildNumber,
+  incrementAppVersion,
+  incrementBuildNumber,
+} from "./release.utils";
 
 async function prepareNextRelease(releaseNumber: string) {
   print({ message: "Prepare next release 🚀" });

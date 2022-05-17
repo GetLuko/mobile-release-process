@@ -15,7 +15,10 @@ export async function cli() {
     await cleanup(releaseNumber);
   } catch (error) {
     print({
-      message: `❌ ${getErrorMessage({ error, fallbackMessage: "release failed" })}`,
+      message: `❌ ${getErrorMessage({
+        error,
+        fallbackMessage: "release failed",
+      })}`,
       type: "error",
     });
     process.exit(1);

@@ -1,0 +1,5 @@
+# Ignore artifacts:
+build
+bin
+node_modules
+babel.config.js

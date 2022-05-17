@@ -1,4 +1,4 @@
-import { bumpBuildNumber } from './bumpBuildNumber';
+import { bumpBuildNumber } from "./bumpBuildNumber";
 
 (async () => {
   await bumpBuildNumber();
