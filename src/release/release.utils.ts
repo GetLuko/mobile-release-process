@@ -3,6 +3,7 @@ import { isNil, overEvery } from "lodash";
 import path from "path";
 
 import { files } from "../configuration";
+import { invariant } from "../script.utils";
 import { AnswerReleaseNumber } from "./prepareAlphaBranch";
 
 export const isSemVer = overEvery<AnswerReleaseNumber["releaseNumber"]>([
@@ -50,10 +51,7 @@ export const getPackageJson = () => {
 export const getCurrentAppVersion = () => {
   const packageJson = getPackageJson();
   const packageJsonVersionNumberSearchResult = packageJson.match(/"version": "(\d|\.)+"/);
-
-  if (packageJsonVersionNumberSearchResult === null) {
-    throw new Error("Could not find 'version' in package.json");
-  }
+  invariant(packageJsonVersionNumberSearchResult !== null, "Release script", "Could not find 'version' in package.json");
 
   return packageJsonVersionNumberSearchResult[0].match(/(\d|\.)+/)?.[0]!;
 };
