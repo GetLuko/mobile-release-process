@@ -2,7 +2,7 @@ import fs from "fs";
 import { isNil, overEvery } from "lodash";
 import path from "path";
 
-import { files } from "../constants";
+import { files } from "../configuration";
 import { AnswerReleaseNumber } from "./prepareAlphaBranch";
 
 export const isSemVer = overEvery<AnswerReleaseNumber["releaseNumber"]>([
