@@ -26,7 +26,7 @@ describe("release utility function", () => {
 
   it("should return current app version", () => {
     expect(getCurrentAppVersion()).toBe("0.3.800");
-    expect(getCurrentAppVersion()).toBe(undefined);
+    expect(() => getCurrentAppVersion()).toThrow("Could not find 'version' in package.json");
   });
   it("should return package.json", () => {
     expect(getPackageJson()).toStrictEqual('{ "version": "0.3.800", "buildNumber": "900" }');
@@ -36,7 +36,6 @@ describe("release utility function", () => {
     expect(getCurrentBuildNumber()).toBe("900");
     expect(getCurrentBuildNumber()).toBe(undefined);
   });
-
   it("should check release number correctly", () => {
     expect(checkReleaseNumber({ releaseNumber: "34.34.34" })).toBe(true);
     expect(checkReleaseNumber({ releaseNumber: "6.6.6" })).toBe(true);

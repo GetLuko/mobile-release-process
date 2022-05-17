@@ -52,9 +52,11 @@ export const getCurrentAppVersion = () => {
   const packageJson = getPackageJson();
   const packageJsonVersionNumberSearchResult = packageJson.match(/"version": "(\d|\.)+"/);
 
-  if (packageJsonVersionNumberSearchResult !== null) {
-    return packageJsonVersionNumberSearchResult[0].match(/(\d|\.)+/)?.[0];
+  if (packageJsonVersionNumberSearchResult === null) {
+    throw new Error("Could not find 'version' in package.json");
   }
+
+  return packageJsonVersionNumberSearchResult[0].match(/(\d|\.)+/)?.[0]!;
 };
 
 export const getCurrentBuildNumber = () => {
