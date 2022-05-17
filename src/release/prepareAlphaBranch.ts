@@ -24,7 +24,7 @@ const checkSubmitCommit = (answer: any): answer is CheckSubmitCommit => {
 };
 
 const askReleaseNumber = async () => {
-  const currentAppVersion = await getCurrentAppVersion();
+  const currentAppVersion = getCurrentAppVersion();
   const answer = await prompt({
     type: "input",
     name: "releaseNumber",

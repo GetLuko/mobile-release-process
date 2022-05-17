@@ -9,7 +9,7 @@
     "url": "https://github.com/GetLuko/mobile-release-process"
   },
   "bin": {
-    "project-name": "bin/cli"
+    "mobile-release-process": "bin/cli"
   },
   "scripts": {
     "test": "jest",

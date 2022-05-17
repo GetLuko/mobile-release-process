@@ -1,5 +1,5 @@
 export const files = {
   packageJson: "package.json",
-  buildGradle: "./android/app/build.gradle",
-  infoPlist: "./ios/LukoCover/Info.plist",
+  buildGradle: `${process.cwd()}/android/app/build.gradle`,
+  infoPlist: `${process.cwd()}/ios/LukoCover/Info.plist`,
 };

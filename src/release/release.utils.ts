@@ -44,8 +44,7 @@ export const incrementBuildNumber = ({ buildNumber, by = 10 }: { buildNumber: an
 };
 
 export const getPackageJson = () => {
-  const baseDir = path.join(__dirname, "../../");
-  return fs.readFileSync(path.join(baseDir, files.packageJson), "utf8");
+  return fs.readFileSync(path.join(process.cwd(), files.packageJson), "utf8");
 };
 
 export const getCurrentAppVersion = () => {
