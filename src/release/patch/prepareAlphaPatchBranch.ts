@@ -1,11 +1,9 @@
 import { prompt } from "enquirer";
+import { RELEASE_BRANCH } from "../../config";
 
 import { checkout, createBranch } from "../../git/commands";
 import { getLatestTag } from "../../git/getLatestTag";
-import {
-  GIT_BRANCH_ALREADY_EXISTS,
-  RELEASE_BRANCH,
-} from "../../git/git.config";
+import { GIT_BRANCH_ALREADY_EXISTS } from "../../git/git.config";
 import invariant from "../../utils/invariant";
 import { print } from "../../utils/print";
 import { throwError } from "../../utils/throwError";
@@ -27,11 +25,7 @@ const askVersionTag = async () => {
     required: true,
   });
 
-  invariant(
-    checkTagVersion(answer),
-    "Alpha patch script",
-    "tag version is not valid"
-  );
+  invariant(checkTagVersion(answer), "Alpha patch script", "tag version is not valid");
   return answer.versionTag;
 };
 
@@ -55,9 +49,7 @@ const createReleaseBranch = async (versionTag: string) => {
   });
 
   if (bumpedAppVersion === undefined) {
-    return throwError(
-      `${RELEASE_BRANCH} branch creation aborted, can not bump app version`
-    );
+    return throwError(`${RELEASE_BRANCH} branch creation aborted, can not bump app version`);
   }
 
   const releaseBranch = `${RELEASE_BRANCH}-${bumpedAppVersion}`;
@@ -80,9 +72,7 @@ const createReleaseBranch = async (versionTag: string) => {
 export const prepareAlphaPatchBranch = async () => {
   print({ message: "\nRelease branch creation" });
   const versionTag = await askVersionTag();
-  const { bumpedAppVersion, releaseBranch } = await createReleaseBranch(
-    versionTag
-  );
+  const { bumpedAppVersion, releaseBranch } = await createReleaseBranch(versionTag);
   await checkout(releaseBranch);
   return bumpedAppVersion;
 };

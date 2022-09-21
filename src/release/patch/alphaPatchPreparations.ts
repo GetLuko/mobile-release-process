@@ -1,7 +1,7 @@
 import Listr from "listr";
+import { DEV_BRANCH } from "../../config";
 
 import { checkout, fetch, pull } from "../../git/commands";
-import { DEV_BRANCH } from "../../git/git.config";
 import { print } from "../../utils/print";
 
 const alphaPatchPreparations = async () => {

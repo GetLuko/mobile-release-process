@@ -1,11 +1,16 @@
 import Listr from "listr";
-import { BITRISE_URL, NOTION_URL, PLAY_CONSOLE_URL, TESTFLIGHT_URL } from "../../config";
+import {
+  BITRISE_URL,
+  NOTION_URL,
+  PLAY_CONSOLE_URL,
+  RELEASE_BRANCH,
+  TESTFLIGHT_URL,
+} from "../../config";
 
 import { push, tag } from "../../git/commands";
-import { RELEASE_BRANCH } from "../../git/git.config";
-import { getConfig } from "../../utils/getConfig";
 import { print } from "../../utils/print";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Confirm } = require("enquirer");
 
 export const releasePatch = async (appVersion: string) => {

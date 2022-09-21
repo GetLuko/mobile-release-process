@@ -1,6 +1,5 @@
-import { BITRISE_URL } from "../../config";
+import { BITRISE_URL, RELEASE_BRANCH, STAGING_BRANCH } from "../../config";
 import { checkout, createBranch, push } from "../../git/commands";
-import { RELEASE_BRANCH, STAGING_BRANCH } from "../../git/git.config";
 import { ask } from "../../utils/ask";
 import { print } from "../../utils/print";
 

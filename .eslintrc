@@ -7,5 +7,8 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "no-unused-vars": "error"
+  }
 }

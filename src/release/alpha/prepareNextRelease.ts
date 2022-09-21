@@ -1,8 +1,9 @@
 import Listr from "listr";
 import pipe from "lodash/fp/pipe";
+import { DEV_BRANCH } from "../../config";
 
 import { checkout, commit, merge, pull, push } from "../../git/commands";
-import { alpha, DEV_BRANCH } from "../../git/git.config";
+import { alpha } from "../../git/git.config";
 import { print } from "../../utils/print";
 import { bumpBuildNumber } from "../buildNumber/bumpBuildNumber";
 import { bumpVersionNumber } from "../buildNumber/bumpVersionNumber";

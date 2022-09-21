@@ -1,8 +1,9 @@
 import Listr from "listr";
 import pipe from "lodash/fp/pipe";
+import { MASTER_BRANCH } from "../../config";
 
 import { checkout, pull, push, merge, tag } from "../../git/commands";
-import { alpha, MASTER_BRANCH } from "../../git/git.config";
+import { alpha } from "../../git/git.config";
 import { print } from "../../utils/print";
 
 async function releaseMasterBranch(releaseNumber: string) {
