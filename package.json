@@ -1,6 +1,6 @@
 {
   "name": "@getluko/mobile-release-process",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "luko",
   "description": "Scripts to automate git flow used by mobile team to release",
   "main": "build/src/index.js",
