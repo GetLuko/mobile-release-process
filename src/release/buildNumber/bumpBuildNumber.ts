@@ -2,23 +2,30 @@ import { prompt } from "enquirer";
 import fs from "fs";
 import path from "path";
 
-import { files } from "../configuration";
-import { throwError } from "../script.utils";
-import { incrementBuildNumber } from "./release.utils";
+import { throwError } from "../../utils/throwError";
+import { files } from "../constants";
+import { askVersionName } from "../utils/askVersionName";
+import { getIncrementNumber } from "../utils/getIncrementNumber";
+import { incrementBuildNumber } from "../utils/incrementBuildNumber";
 
 const askNextBuildNumber = async (currentBuildNumber: string) => {
+  const versionName = await askVersionName();
+
   const { newBuildNumber } = await prompt<{ newBuildNumber: string }>({
     type: "input",
     name: "newBuildNumber",
     message: "What is the new buildNumber to bump to?",
-    initial: incrementBuildNumber({ buildNumber: currentBuildNumber }),
+    initial: incrementBuildNumber({
+      buildNumber: currentBuildNumber,
+      by: getIncrementNumber(versionName),
+    }),
   });
 
   return newBuildNumber;
 };
 
 export async function bumpBuildNumber(nextBuildNumber?: string) {
-  const baseDir = path.join(__dirname, "../../");
+  const baseDir = path.join(__dirname, "../../../");
 
   const packageJson = fs.readFileSync(
     path.join(baseDir, files.packageJson),

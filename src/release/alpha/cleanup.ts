@@ -1,9 +1,9 @@
 import Listr from "listr";
-import { pipe } from "lodash/fp";
+import pipe from "lodash/fp/pipe";
 
-import { alpha } from "../git/git.config";
-import { deleteLocalBranch, deleteRemoteBranch } from "../git/git.utils";
-import { print } from "../script.utils";
+import { deleteLocalBranch, deleteRemoteBranch } from "../../git/commands";
+import { alpha } from "../../git/git.config";
+import { print } from "../../utils/print";
 
 async function cleanup(releaseNumber: string) {
   print({ message: "Housekeeping 🧹" });

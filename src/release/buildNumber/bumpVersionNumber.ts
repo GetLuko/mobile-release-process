@@ -2,23 +2,30 @@ import { prompt } from "enquirer";
 import fs from "fs";
 import path from "path";
 
-import { files } from "../configuration";
-import { throwError } from "../script.utils";
-import { incrementAppVersion } from "./release.utils";
+import { throwError } from "../../utils/throwError";
+import { files } from "../constants";
+import { askVersionName } from "../utils/askVersionName";
+import { getIncrementNumber } from "../utils/getIncrementNumber";
+import { incrementAppVersion } from "../utils/incrementAppVersion";
 
 const askNextVersionNumber = async (version: string) => {
+  const versionName = await askVersionName();
+
   const { newVersion } = await prompt<{ newVersion: string }>({
     type: "input",
     name: "newVersion",
     message: "What is the new version to bump to? [X.Y.ZZZ]",
-    initial: incrementAppVersion({ version }),
+    initial: incrementAppVersion({
+      version,
+      by: getIncrementNumber(versionName),
+    }),
   });
 
   return newVersion;
 };
 
 export async function bumpVersionNumber(nextVersion?: string) {
-  const baseDir = path.join(__dirname, "../../");
+  const baseDir = path.join(__dirname, "../../../");
 
   const packageJson = fs.readFileSync(
     path.join(baseDir, files.packageJson),

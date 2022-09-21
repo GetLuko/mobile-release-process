@@ -1,11 +1,14 @@
 import { prompt } from "enquirer";
 import Listr from "listr";
-import { isNil, pipe } from "lodash/fp";
+import pipe from "lodash/fp/pipe";
 
-import { alpha } from "../git/git.config";
-import { changelog, fetch, commit, checkout } from "../git/git.utils";
-import { invariant, print } from "../script.utils";
-import { checkReleaseNumber, getCurrentAppVersion } from "./release.utils";
+import { changelog, fetch, checkout } from "../../git/commands";
+import { alpha } from "../../git/git.config";
+import invariant from "../../utils/invariant";
+import { print } from "../../utils/print";
+import { checkReleaseNumber } from "../utils/checkReleaseNumber";
+import { getCurrentAppVersion } from "../utils/getCurrentAppVersion";
+import { saveChangelog } from "./saveChangelog";
 
 export type AnswerReleaseNumber = {
   releaseNumber: string;
@@ -15,16 +18,8 @@ export type CheckSubmitCommit = {
   submitCommit: boolean;
 };
 
-const checkSubmitCommit = (answer: any): answer is CheckSubmitCommit => {
-  if (isNil(answer) || isNil(answer?.submitCommit)) {
-    return false;
-  }
-
-  return typeof answer?.submitCommit === "boolean";
-};
-
 const askReleaseNumber = async () => {
-  const currentAppVersion = getCurrentAppVersion();
+  const currentAppVersion = await getCurrentAppVersion();
   const answer = await prompt({
     type: "input",
     name: "releaseNumber",
@@ -63,27 +58,6 @@ const generateChangelog = async (releaseNumber: string) => {
   ]);
 
   await tasks.run();
-};
-
-const saveChangelog = async (releaseNumber: string) => {
-  const answer = await prompt({
-    type: "confirm",
-    name: "submitCommit",
-    message:
-      "Check the changelog and save it before continue \nDo you want to commit the changelog ?",
-  });
-
-  invariant(
-    checkSubmitCommit(answer),
-    "release script",
-    "submitCommit answer is not valid"
-  );
-
-  if (answer.submitCommit) {
-    await commit({ message: `v${releaseNumber}`, noVerify: true });
-    return;
-  }
-  process.exit(1);
 };
 
 async function prepareAlphaBranch() {

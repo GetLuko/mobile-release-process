@@ -1,6 +1,6 @@
 import { prompt } from "enquirer";
 
-import { print } from "../script.utils";
+import { print } from "../../utils/print";
 
 type Confirmation = { confirmation: boolean };
 
