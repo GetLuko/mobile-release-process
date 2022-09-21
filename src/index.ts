@@ -11,7 +11,7 @@ export async function run() {
       await release();
       return;
     }
-    if (process.argv.includes("patch")) {
+    if (process.argv.includes("alpha-patch")) {
       await patch();
       return;
     }
