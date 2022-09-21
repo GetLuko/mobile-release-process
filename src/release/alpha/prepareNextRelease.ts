@@ -55,11 +55,11 @@ async function prepareNextRelease(releaseNumber: string) {
     },
     {
       title: "Merge local alpha branch on dev",
-      task: async () => await pipe(alpha, merge)(releaseNumber),
+      task: async () => pipe(alpha, merge)(releaseNumber),
     },
     {
       title: "Update the remote branch dev",
-      task: async () => await push(DEV_BRANCH),
+      task: async () => push(DEV_BRANCH),
     },
   ]);
 

@@ -1,14 +1,10 @@
 import Listr from "listr";
+import { BITRISE_URL, NOTION_URL, PLAY_CONSOLE_URL, TESTFLIGHT_URL } from "../../config";
 
 import { push, tag } from "../../git/commands";
 import { RELEASE_BRANCH } from "../../git/git.config";
+import { getConfig } from "../../utils/getConfig";
 import { print } from "../../utils/print";
-import {
-  BITRISE_URL,
-  PLAY_CONSOLE_URL,
-  TESTFLIGHT_URL,
-  NOTION_URL,
-} from "../constants";
 
 const { Confirm } = require("enquirer");
 

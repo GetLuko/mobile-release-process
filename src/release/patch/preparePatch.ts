@@ -59,11 +59,7 @@ export const preparePatch = async ({ appVersion }: { appVersion: string }) => {
 
   const commitList = answer?.commitList;
 
-  invariant(
-    checkCommitList(commitList),
-    "Alpha patch script",
-    "commit list is invalid"
-  );
+  invariant(checkCommitList(commitList), "Alpha patch script", "commit list is invalid");
 
   await applyPatches(commitList);
 
@@ -85,12 +81,11 @@ export const preparePatch = async ({ appVersion }: { appVersion: string }) => {
     },
     {
       title: "Commit build and version number",
-      task: () =>
-        commit({ message: `build and version number`, noVerify: true }),
+      task: () => commit({ message: `build and version number`, noVerify: true }),
     },
     {
       title: "Generate the changelog",
-      task: changelog,
+      task: () => changelog(),
     },
     {
       title: "Save the changelog",

@@ -1,8 +1,8 @@
+import { BITRISE_URL } from "../../config";
 import { checkout, createBranch, push } from "../../git/commands";
 import { RELEASE_BRANCH, STAGING_BRANCH } from "../../git/git.config";
 import { ask } from "../../utils/ask";
 import { print } from "../../utils/print";
-import { BITRISE_URL } from "../constants";
 
 export const createStagingBranch = async (appVersion: string) => {
   print({ message: `\nCreate a ${STAGING_BRANCH} branch` });

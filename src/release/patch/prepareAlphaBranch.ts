@@ -28,11 +28,7 @@ const askReleaseNumber = async () => {
     required: true,
   });
 
-  invariant(
-    checkReleaseNumber(answer),
-    "Release script",
-    "release number is not valid"
-  );
+  invariant(checkReleaseNumber(answer), "Release script", "release number is not valid");
 
   return answer.releaseNumber;
 };
@@ -41,7 +37,7 @@ const generateChangelog = async (releaseNumber: string) => {
   const tasks = new Listr([
     {
       title: "Fetch branches and tags",
-      task: fetch,
+      task: () => fetch(),
     },
     {
       title: "Checkout on current alpha branch",
@@ -49,7 +45,7 @@ const generateChangelog = async (releaseNumber: string) => {
     },
     {
       title: "Generate the changelog",
-      task: changelog,
+      task: () => changelog(),
     },
     {
       title: "Save the changelog",
