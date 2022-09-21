@@ -5,7 +5,7 @@ import prepareNextRelease from "./alpha/prepareNextRelease";
 import releasePreparations from "./alpha/releasePreparations";
 import prepareAlphaBranch from "./patch/prepareAlphaBranch";
 
-(async () => {
+export async function release() {
   print({ message: "Let's prepare the new alpha release 🔥\n" });
   try {
     await releasePreparations();
@@ -19,4 +19,4 @@ import prepareAlphaBranch from "./patch/prepareAlphaBranch";
       type: "error",
     });
   }
-})();
+}

@@ -1,23 +1,23 @@
 {
   "name": "@getluko/mobile-release-process",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "luko",
   "description": "Scripts to automate git flow used by mobile team to release",
-  "main": "build/index.js",
+  "main": "build/src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/GetLuko/mobile-release-process"
   },
   "bin": {
-    "mobile-release-process": "bin/cli"
+    "mobile-release-process": "./build/src/cli.js"
   },
   "scripts": {
     "test": "jest",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "prettier": "prettier --write 'src/**/*.ts'",
-    "build": "tsc --build --force",
-    "play": "./bin/cli"
+    "build": "rimraf ./build && tsc --build --force",
+    "mobile-release-process": "./build/src/cli.js"
   },
   "keywords": [],
   "license": "MIT",

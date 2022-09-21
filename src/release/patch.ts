@@ -6,7 +6,7 @@ import { prepareAlphaPatchBranch } from "./patch/prepareAlphaPatchBranch";
 import { preparePatch } from "./patch/preparePatch";
 import { releasePatch } from "./patch/releasePatch";
 
-(async () => {
+export async function patch() {
   print({ message: "\nLet's prepare an alpha patch 🚒\n" });
   try {
     await alphaPatchPreparations();
@@ -21,4 +21,4 @@ import { releasePatch } from "./patch/releasePatch";
       type: "error",
     });
   }
-})();
+}

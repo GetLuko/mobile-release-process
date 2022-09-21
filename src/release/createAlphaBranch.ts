@@ -4,7 +4,7 @@ import { print } from "../utils/print";
 import { throwError } from "../utils/throwError";
 import { getCurrentAppVersion } from "./utils/getCurrentAppVersion";
 
-(async () => {
+export async function createAlphaBranch() {
   print({ message: "Create next alpha branch for the release" });
   try {
     const currentAppVersion = getCurrentAppVersion();
@@ -21,4 +21,4 @@ import { getCurrentAppVersion } from "./utils/getCurrentAppVersion";
       type: "error",
     });
   }
-})();
+}
