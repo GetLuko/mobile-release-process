@@ -35,8 +35,8 @@ yarn add @getluko/mobile-release-process --dev
     "stagingBranch": "staging" // optional (default: staging)
   },
   // Use during the script execution to output shortcut link in the terminal
-  "bitrise": "https://app.bitrise.io/app/xxxxxxxxxx", // optional (default: undefined)
-  "notion": "https://www.notion.so/xxxx/xxxxx", // optional (default: undefined)
+  "releaseCILink": "https://app.bitrise.io/app/xxxxxxxxxx", // optional (default: undefined)
+  "releaseTrackingLink": "https://www.notion.so/xxxx/xxxxx", // optional (default: undefined)
   "playConsole": "https://play.google.com/console/xxxxx", // optional (default: undefined)
   "testflight": "https://appstoreconnect.apple.com/xxxxx" // optional (default: undefined)
 }
@@ -50,7 +50,7 @@ Release a new version of the app (new alpha), will bump by 10 the version number
 npx mobile-release-process release
 ```
 
-Release a patch for the current app in alpha, will bump by 1 the version number agit addnd buildNumber
+Release a patch for the current app in alpha, will bump by 1 the version number and buildNumber
 
 ```
 npx mobile-release-process alpha-patch
