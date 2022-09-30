@@ -1,4 +1,4 @@
-import { BITRISE_URL, RELEASE_BRANCH, STAGING_BRANCH } from "../../config";
+import { RELEASE_CI_URL, RELEASE_BRANCH, STAGING_BRANCH } from "../../config";
 import { checkout, createBranch, push } from "../../git/commands";
 import { ask } from "../../utils/ask";
 import { print } from "../../utils/print";
@@ -17,7 +17,7 @@ export const createStagingBranch = async (appVersion: string) => {
     await push(stagingBranch);
 
     print({
-      message: `Create manualy your Bitrise build here => ${BITRISE_URL}`,
+      message: `Create manualy your Bitrise build here => ${RELEASE_CI_URL}`,
     });
 
     const qaAnswer = await ask({

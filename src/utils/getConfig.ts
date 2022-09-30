@@ -3,7 +3,6 @@ import path from "path";
 import invariant from "./invariant";
 import { isValidConfiguration } from "./isValidConfiguration";
 import { print } from "./print";
-import { throwError } from "./throwError";
 
 export const getConfig = () => {
   try {

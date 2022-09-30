@@ -7,10 +7,10 @@ import { print } from "./print";
 export type Configuration = {
   buildGradle: string;
   infoPlist: string;
-  bitrise?: string;
+  releaseCILink?: string;
   testflight?: string;
   playConsole?: string;
-  notion?: string;
+  releaseTrackingLink?: string;
   git?: {
     devBranch?: string;
     alphaBranch?: string;
@@ -20,16 +20,14 @@ export type Configuration = {
   };
 };
 
-export const isValidConfiguration = (
-  configuration: unknown
-): configuration is Configuration => {
+export const isValidConfiguration = (configuration: unknown): configuration is Configuration => {
   const isValid = overEvery([
     (obj) => isString(get(obj, "buildGradle")),
     (obj) => isString(get(obj, "infoPlist")),
-    isStringOrUndefined("bitrise"),
+    isStringOrUndefined("releaseCILink"),
     isStringOrUndefined("testflight"),
     isStringOrUndefined("playConsole"),
-    isStringOrUndefined("notion"),
+    isStringOrUndefined("releaseTrackingLink"),
     isStringOrUndefined("git.devBranch"),
     isStringOrUndefined("git.alphaBranch"),
     isStringOrUndefined("git.masterBranch"),
