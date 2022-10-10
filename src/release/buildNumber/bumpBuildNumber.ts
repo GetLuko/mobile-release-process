@@ -56,7 +56,7 @@ export async function bumpBuildNumber(nextBuildNumber?: string) {
   }
 
   const updatedInfoPlist = infoPlist.replace(buildNumber, newBuildNumber);
-  fs.writeFileSync(path.join(baseDir, infoPlist), updatedInfoPlist, "utf8");
+  fs.writeFileSync(path.join(baseDir, INFO_PLIST_PATH), updatedInfoPlist, "utf8");
 
   const buildGradle = fs.readFileSync(path.join(baseDir, BUILD_GRADLE_PATH), "utf8");
   if (buildGradle.indexOf(buildNumber) === -1) {
@@ -64,5 +64,5 @@ export async function bumpBuildNumber(nextBuildNumber?: string) {
   }
 
   const updatedBuildGradle = buildGradle.replace(buildNumber, newBuildNumber);
-  fs.writeFileSync(path.join(baseDir, buildGradle), updatedBuildGradle, "utf8");
+  fs.writeFileSync(path.join(baseDir, BUILD_GRADLE_PATH), updatedBuildGradle, "utf8");
 }

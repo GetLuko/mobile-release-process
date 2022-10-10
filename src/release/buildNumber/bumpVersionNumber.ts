@@ -27,9 +27,8 @@ const askNextVersionNumber = async (version: string) => {
 
 export async function bumpVersionNumber(nextVersion?: string) {
   const baseDir = process.cwd();
-
-  const packageJson = fs.readFileSync(path.join(baseDir, files.packageJson), "utf8");
-
+  const pathPackageJson = path.join(baseDir, files.packageJson);
+  const packageJson = fs.readFileSync(pathPackageJson, "utf8");
   const packageJsonVersionNumberSearchResult = packageJson.match(/"version": "(\d|\.)+"/);
 
   if (packageJsonVersionNumberSearchResult == null) {
@@ -47,7 +46,6 @@ export async function bumpVersionNumber(nextVersion?: string) {
   );
 
   fs.writeFileSync(path.join(baseDir, files.packageJson), updatedPackageJson, "utf8");
-
   const infoPlist = fs.readFileSync(path.join(baseDir, INFO_PLIST_PATH), "utf8");
 
   if (infoPlist.indexOf(version) === -1) {
@@ -55,13 +53,12 @@ export async function bumpVersionNumber(nextVersion?: string) {
   }
 
   const updatedInfoPlist = infoPlist.replace(version, newVersion);
-  fs.writeFileSync(path.join(baseDir, infoPlist), updatedInfoPlist, "utf8");
+  fs.writeFileSync(path.join(baseDir, INFO_PLIST_PATH), updatedInfoPlist, "utf8");
 
   const buildGradle = fs.readFileSync(path.join(baseDir, BUILD_GRADLE_PATH), "utf8");
   if (buildGradle.indexOf(version) === -1) {
     throwError("Build number inside build.gradle does not match to package.json");
   }
-
   const updatedBuildGradle = buildGradle.replace(version, newVersion);
-  fs.writeFileSync(path.join(baseDir, buildGradle), updatedBuildGradle, "utf8");
+  fs.writeFileSync(path.join(baseDir, BUILD_GRADLE_PATH), updatedBuildGradle, "utf8");
 }
